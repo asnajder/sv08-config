@@ -200,6 +200,14 @@ The included macros in my `config/options/probe/sovol-eddy.cfg` can be used like
 6. Bed mesh
 7. Start print!
 
+**Notes / updates on your QGL macro:**
+
+I learned from eddy-ng it is a good idea to run two QGLs when you have a nozzle tap. One a bit higher in case of a racked gantry, then next one lower.
+
+So perhaps you'll want to update your QGL to use do something like:
+1. First pass with `horizontal_move_z=5 retry_tolerance=1`
+2. Second pass with `horizontal_move_z=2`
+
 To use step 7.5's tap, use the macro `SET_Z_FROM_PROBE METHOD=tap`
    
 To use step 7.6's bed mesh macro use:
