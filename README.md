@@ -1,5 +1,13 @@
 # Sovol Eddy on a mainlined SV08 with native Klipper tap and scan correction
 
+## Disclaimer
+
+These steps are all fresh, and this area of Klipper is advancing/changing quite frequently, so steps are subject to change.
+
+For example, some of the macros we use now may have actual commands built in when some PRs go through (#7179 for example), however, their functionality now should remain the same
+
+For the record, everything I have here is working perfectly as of `Version: v0.13.0-533-g6d7d3403`
+
 ## Prereq
 
 - SV08 mainlined with the Sovol Eddy kit installed as outlined in their docs, but do not flash their software as that would ruin mainline
