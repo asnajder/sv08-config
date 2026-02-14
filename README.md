@@ -87,6 +87,16 @@ Run:
 PROBE_EDDY_CURRENT_CALIBRATE CHIP=my_eddy_probe
 ```
 
+(**Note** this next section was taken from the official guide https://www.klipper3d.org/Eddy_Probe.html word for word)
+
+"Once the tool starts, follow the steps described at "the paper test" (https://www.klipper3d.org/Bed_Level.html#the-paper-test) to determine the actual distance between the nozzle and bed at the given location. 
+
+Once those steps are complete one can `ACCEPT` the position. 
+
+The tool will then move the toolhead so that the sensor is above the point where the nozzle used to be and run a series of movements to correlate the sensor to Z positions. 
+
+This will take a couple of minutes. After the tool completes it will output the sensor performance data"
+
 You should see something similar (but not the same):
 
 ```
