@@ -1,4 +1,4 @@
-# Sovol Eddy on a mainlined SV08 with native Klipper tap and temp correction
+# Sovol Eddy on a mainlined SV08 with native Klipper tap and scan correction
 
 ## Prereq
 
