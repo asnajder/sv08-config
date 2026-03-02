@@ -195,7 +195,7 @@ Test it all out, if you run:
 PROBE METHOD=tap
 ```
 
-nothing should blow up, and as the official guide suggests, running:
+nothing should blow up, and as the official guide suggests, running (after a Z home):
 
 ```
 PROBE_ACCURACY METHOD=tap
