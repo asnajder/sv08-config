@@ -241,10 +241,6 @@ This bed mesh macro creates another offset from the scan that is unique from you
 
 If you notice your first layer needs to be a bit higher or lower, you can baby step your Z down or up, then run `Z_OFFSET_APPLY_PROBE METHOD=tap` and `SAVE_CONFIG`, the value will be stored as `tap_z_offset` under your `#*# <---------------------- SAVE_CONFIG ---------------------->` section  
 
-As always, negative values bring nozzle down, postive values bring the nozzle up - you'll find the value you want by baby stepping when doing a first layer test or something  
-
-If you know your offset or want to put it manually, in your `[probe_eddy_current my_eddy_probe]` section you can set `tap_z_offset` as well  
-
 ## 9. Credit and sources
 
 Thanks especially to Timofey Titavets (https://klipper.discourse.group/u/nefelim4ag/summary) for their help setting this up and for implementing this code into Klipper!
