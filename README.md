@@ -239,11 +239,11 @@ This bed mesh macro creates another offset from the scan that is unique from you
 
 ## 8. First layer corrections
 
-If you notice your first layer needs to be a bit higher or lower, edit the value of `tap_z_offset` in your `[probe_eddy_current my_eddy_probe]` section  
+If you notice your first layer needs to be a bit higher or lower, you can baby step your Z down or up, and `SAVE_CONFIG`, the value will be stored as `tap_z_offset` under your `#*# <---------------------- SAVE_CONFIG ---------------------->` section  
 
-`tap_z_offset: 0`
+As always, negative values bring nozzle down, postive values bring the nozzle up - you'll find the value you want by baby stepping when doing a first layer test or something  
 
-Negative values bring nozzle down, postive values bring the nozzle up - you'll find the value you want by baby stepping when doing a first layer test or something. Note that saving after baby stepping will do nothing, YOU HAVE TO EDIT THIS LINE IN YOUR CONFIG!  
+If you know your offset or want to put it manually, in your `[probe_eddy_current my_eddy_probe]` section you can set `tap_z_offset` as well  
 
 ## 9. Credit and sources
 
