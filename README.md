@@ -6,7 +6,7 @@ These steps are all fresh, and this area of Klipper is advancing/changing quite 
 
 For example, some of the macros we use now may have actual commands built in when some PRs go through (#7179 for example), however, their functionality now should remain the same
 
-For the record, everything I have here is working perfectly as of `Version: v0.13.0-533-g6d7d3403`
+For the record, everything I have here is working perfectly as of `Version v0.13.0-563-gf1fb5756` of Klipper  
 
 ## Prereq
 
@@ -43,14 +43,10 @@ If this is not done, the calibration step will not work correctly.
 
 Copy my sovol-eddy-cfg from `config/options/probe/sovol-eddy.cfg` here and reference it in your printer.cfg, however, it's a good idea to change the following for now (we will update/change it later):
 
-### In the `[probe_eddy_current my_eddy_probe]` section, comment out the following lines:
+### In the `[probe_eddy_current my_eddy_probe]` section, comment out the following line:
 
 ```text
 tap_threshold: 140
-samples: 5
-samples_result: average #median
-samples_tolerance: 0.025
-samples_tolerance_retries: 3
 ```
 
 ### In the `[homing_override]` section
@@ -108,23 +104,23 @@ This will take a couple of minutes. After the tool completes it will output the 
 You should see something similar (but not the same):
 
 ```
-10:35 p.m.
+4:25 p.m.
 The SAVE_CONFIG command will update the printer config file
 and restart the printer.
-10:35 p.m.
-z_offset: 3.010 # noise 0.001115mm, MAD_Hz=13.904
-10:35 p.m.
-z_offset: 2.010 # noise 0.001014mm, MAD_Hz=19.484
-10:35 p.m.
-z_offset: 1.010 # noise 0.000772mm, MAD_Hz=23.503
-10:35 p.m.
-z_offset: 0.530 # noise 0.000158mm, MAD_Hz=6.995
-10:35 p.m.
-z_offset: 0.290 # noise 0.001456mm, MAD_Hz=69.981
-10:35 p.m.
-Total frequency range: 87791.762 Hz
-10:35 p.m.
-probe_eddy_current: noise 0.001387mm, MAD_Hz=28.688 in 2525 queries
+4:25 p.m.
+z: 3.010 # noise 0.000620mm, MAD_Hz=7.560
+4:25 p.m.
+z: 2.010 # noise 0.000688mm, MAD_Hz=13.898
+4:25 p.m.
+z: 1.010 # noise 0.002728mm, MAD_Hz=80.280
+4:25 p.m.
+z: 0.530 # noise 0.000495mm, MAD_Hz=21.043
+4:25 p.m.
+z: 0.290 # noise 0.001228mm, MAD_Hz=57.892
+4:25 p.m.
+Total frequency range: 92849.729 Hz
+4:25 p.m.
+probe_eddy_current: noise 0.001685mm, MAD_Hz=36.296 in 2525 queries
 ```
 
 Issue:
@@ -142,7 +138,7 @@ Now, for your own tap calibration you can follow https://www.klipper3d.org/Eddy_
 In Step 4's output rules of the calibration, you'll see lines like:
 
 ```
-z_offset: 0.290 # noise 0.001456mm, MAD_Hz=69.981
+z: 1.010 # noise 0.002728mm, MAD_Hz=80.280
 ```
 
 What you do is take one of the higher (or higest values) to start, round it to nearest number, and multiply by 2 to give you your `tap_threshold` value which is updated in your `[probe_eddy_current my_eddy_probe]` section of config.
@@ -150,19 +146,15 @@ What you do is take one of the higher (or higest values) to start, round it to n
 Example using my results:
 
 ```
-z_offset: 0.290 # noise 0.001456mm, MAD_Hz=69.981
+z: 1.010 # noise 0.002728mm, MAD_Hz=80.280
 ```
 
-So `69.981` rounded up is `70` multiplied by 2 is `140`.
+So `80.280` rounded down is `80` multiplied by 2 is `160`.
 
-Do the same for your results, and put that value into the `[probe_eddy_current my_eddy_probe]` section of your config, uncommeting everything again:
+Do the same for your results, and put that value into the `[probe_eddy_current my_eddy_probe]` section of your config, uncommenting it as well:
 
 ```text
-tap_threshold: 140
-samples: 5
-samples_result: average #median
-samples_tolerance: 0.025
-samples_tolerance_retries: 3
+tap_threshold: 160
 ```
 
 You can also change the `[homing_override]` section back: change the line:
@@ -189,7 +181,7 @@ after your changes.
 
 ## 6. Test
 
-Test it all out, if you run:
+Test it all out, if you run (hover your hand over your emergency stop button in the GUI or on your printer!!!):
 
 ```
 PROBE METHOD=tap
@@ -201,9 +193,14 @@ nothing should blow up, and as the official guide suggests, running (after a Z h
 PROBE_ACCURACY METHOD=tap
 ```
 
-should give you a `range:` output of around ~0.02mm
+should give you a `range:` output of around ~0.02mm, here was mine:
+```
+probe accuracy results: maximum 0.005618, minimum -0.001772, range 0.007391, average 0.002776, median 0.002923, standard deviation 0.002006
+```
 
-If not, update your `tap_threshold` value using the tests outlined in the guide. I personally just took the value I showed you in my example and it was great out of the box.
+So I got a range of `range 0.007391`, which is REALLY good.
+
+If you got outside of ~0.02, update your `tap_threshold` value using the tests outlined in the guide. I personally just took the value I showed you in my example and it was great out of the box.
 
 ## 7. How to use it
 
@@ -242,11 +239,11 @@ This bed mesh macro creates another offset from the scan that is unique from you
 
 ## 8. First layer corrections
 
-If you notice your first layer needs to be a bit higher or lower, edit this value in this line of the `[gcode_macro _RELOAD_Z_OFFSET_FROM_PROBE]`
+If you notice your first layer needs to be a bit higher or lower, edit the value of `tap_z_offset` in your `[probe_eddy_current my_eddy_probe]` section  
 
-`    {% set tap_correction = -0.05 %} # manual, can adjust up or down as needed`
+`tap_z_offset: 0`
 
-Negative values bring nozzle down, postive values bring the nozzle up
+Negative values bring nozzle down, postive values bring the nozzle up - you'll find the value you want by baby stepping when doing a first layer test or something. Note that saving after baby stepping will do nothing, YOU HAVE TO EDIT THIS LINE IN YOUR CONFIG!  
 
 ## 9. Credit and sources
 
