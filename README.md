@@ -49,20 +49,6 @@ Copy my sovol-eddy-cfg from `config/options/probe/sovol-eddy.cfg` here and refer
 tap_threshold: 140
 ```
 
-### In the `[homing_override]` section
-
-Change the line:
-
-```
-SET_Z_FROM_PROBE METHOD=tap
-```
-
-to:
-
-```
-SET_Z_FROM_PROBE
-```
-
 ---
 
 ## 3. Home and set kinematic position
@@ -155,18 +141,6 @@ Do the same for your results, and put that value into the `[probe_eddy_current m
 
 ```text
 tap_threshold: 160
-```
-
-You can also change the `[homing_override]` section back: change the line:
-
-```
-SET_Z_FROM_PROBE
-```
-
-to:
-
-```
-SET_Z_FROM_PROBE METHOD=tap
 ```
 
 Run:
