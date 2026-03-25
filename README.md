@@ -201,7 +201,6 @@ To use step 7.5's tap, use the macro `SET_Z_FROM_PROBE METHOD=tap`
    
 To use step 7.6's bed mesh macro use:
 ```
-    SET_SCAN_FROM_TAP
     # For best results should match the previous command "scan" height
     {% set scan_height = printer.configfile.settings["probe_eddy_current my_eddy_probe"].descend_z %}
     BED_MESH_CALIBRATE ADAPTIVE=1 METHOD=scan HORIZONTAL_MOVE_Z={scan_height}
