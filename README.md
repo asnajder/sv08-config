@@ -185,9 +185,8 @@ The included macros in my `config/options/probe/sovol-eddy.cfg` can be used like
 2. QGL, re-home Z
 3. Heat hotend to 150C, clean nozzle
 4. Go somewhere (center or SMART_PARK from KAMP)
-5. Tap
-6. Bed mesh
-7. Start print!
+5. Tap + Bed Mesh with `SET_SCAN_FROM_TAP`
+6. Start print!
 
 **Notes / updates on your QGL macro:**
 
