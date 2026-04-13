@@ -25,6 +25,7 @@ First step is editing `ldc1612.py` to edit an else statement that helps Klipper 
 For now:
 
 ```bash
+cd ~
 cd klipper/klippy/extras/
 edit ldc1612.py with your fav editor (vi/vim/nano etc)
 go to line 94 (or if that changes, the line with: self.sensor_div = 1 if self.clock_freq != DEFAULT_LDC1612_FREQ else 2)
