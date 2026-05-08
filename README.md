@@ -120,37 +120,9 @@ SAVE_CONFIG
 
 ## 5. Tap calibration
 
-Now, for your own tap calibration you can follow https://www.klipper3d.org/Eddy_Probe.html#tap-calibration , or, here is a condensed version using an estimation:
+Now, for your own tap calibration you can follow https://www.klipper3d.org/Eddy_Probe.html#tap-calibration
 
-In Step 4's output rules of the calibration, you'll see lines like:
-
-```
-z: 1.010 # noise 0.002728mm, MAD_Hz=80.280
-```
-
-What you do is take one of the higher (or higest values) to start, round it to nearest number, and multiply by 2 to give you your `tap_threshold` value which is updated in your `[probe_eddy_current my_eddy_probe]` section of config.
-
-Example using my results:
-
-```
-z: 1.010 # noise 0.002728mm, MAD_Hz=80.280
-```
-
-So `80.280` rounded down is `80` multiplied by 2 is `160`.
-
-Do the same for your results, and put that value into the `[probe_eddy_current my_eddy_probe]` section of your config, uncommenting it as well:
-
-```text
-tap_threshold: 160
-```
-
-Run:
-
-```
-SAVE_CONFIG
-```
-
-after your changes.
+Note, that if you are upgrading from an older Klipper that also had `tap_threshold` defined, you will need to comment it out before doing the above.
 
 ---
 
