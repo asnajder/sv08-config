@@ -20,23 +20,7 @@ For the record, everything I have here is working perfectly as of `Version v0.13
 
 ## 1. Edit `ldc1612.py`
 
-First step is editing `ldc1612.py` to edit an else statement that helps Klipper use the right values for the frequency of the coil. In future updates of Klipper this will be done automatically.
-
-For now:
-
-```bash
-cd ~
-cd klipper/klippy/extras/
-edit ldc1612.py with your fav editor (vi/vim/nano etc)
-go to line 94 (or if that changes, the line with: self.sensor_div = 1 if self.clock_freq != DEFAULT_LDC1612_FREQ else 2)
-change else 2 to else 4
-save the file
-sudo systemctl restart klipper.service
-```
-
-If this is not done, the calibration step will not work correctly.
-
-**NOTE:** If you automatically update Klipper and this file changes, you will need to redo this step until it is added in via an official commit eventually.
+**Edit: Hack is no longer required after v0.13.0-650-gca8230d50.**
 
 ---
 
